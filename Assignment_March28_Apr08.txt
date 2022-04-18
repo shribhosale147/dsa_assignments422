@@ -1,0 +1,902 @@
+*******************************************************************************************************************************
+28-03-2022
+*******************************************************************************************************************************
+
+1. WAP for searching a number using binary search. Return the index of the num if exists else return .
+public class RotateArr24 {
+
+        public static int searchEleArrBinary(int arr[],int ele,int start,int end){
+
+            int mid=(start+end)/2;
+            while (start<=end){
+                if(arr[mid]==ele){
+                    return mid;
+                }else if(arr[mid]>ele){
+                    end=mid-1;
+
+                }else{
+                    start=mid+1;
+                }
+                mid=(start+end)/2;
+            }
+            return -1;
+        }
+        public static void main(String[] args) {
+            
+            int a[] = {2,5,7,8,12,46,55};
+            int ele=46;
+            System.out.println(searchEleArrBinary(a,ele,0,a.length));
+        }
+}
+2. Find the cube root of a number using binary search
+public class RotateArr24 {
+    public static int findcuberootBinary(int arr[],int ele,int start,int end){
+        int mid=(start+end)/2;
+        int cube=mid*mid*mid;
+        while (start<=end){
+            if(cube==ele){
+                return mid;
+            }else if(cube>ele){
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+            mid=(start+end)/2;
+            cube=mid*mid*mid;
+        }
+        return -1;
+    }
+public static void main(String[] args) {
+
+            int a[]={1,2,3,4,5,6,7,8,9,10,11,12,13};
+            int ele=1000;
+            int end=a.length;
+            System.out.println(findcuberootBinary(a,ele,1,end));
+        }
+}
+3. Find the intersection elements of two sorted arrays
+A[] = { 3,6,8}   B[] ={1,2,3,5,6,90,789}
+Output = 3,6
+
+public class RotateArr24 {
+    public static int findintersection2arrBinary(int arr[],int start,int end,int ele){
+        int mid=(start+end)/2;
+        while (start<=end){
+            if(arr[mid]==ele){
+                return arr[mid];
+            }else if (arr[mid]>ele){
+                return findintersection2arrBinary(arr,start,mid-1,ele);
+            }else{
+                return findintersection2arrBinary(arr,mid+1,end,ele);
+            }
+        }
+        return -1;
+    }
+	public static void main(String[] args) {
+
+            int a1[]={1,2,7,10};
+            int a2[]={1,2,5,6,7,8,9};
+            int end=a2.length-1;
+            for (int i = 0; i <a1.length ; i++) {
+                int result=findintersection2arrBinary(a2,0,end,a1[i]);
+                if (result!=-1){
+                    System.out.print(result+" ");
+                }
+            }
+        }
+}
+
+*******************************************************************************************************************************
+29-03-2022
+*******************************************************************************************************************************
+Q1. Find the smallest missing element from a sorted array
+class MissingEle{
+	public static void findsmallmissnumberArr(int arr[]){
+
+        for (int i = 0; i <arr.length-1 ; i++) {
+            if(arr[i]!=i+1){
+                System.out.println("Missing number:-"+(i+1));
+                return;
+            }
+
+        }
+    }
+    public static void main(String args[]){
+        int arr[]={1,2,3,4,6,7};
+        findsmallmissnumberArr(arr);
+    }
+}
+}
+2. Find the missing term in a sequence in logarithmic time (logn)
+
+class MissingEle{
+	public static void findsmallmissnumberArr(int arr[]){
+
+        for (int i = 0; i <arr.length-1 ; i++) {
+            if(arr[i]!=i+1){
+                System.out.println("Missing number:-"+(i+1));
+                return;
+            }
+
+        }
+    }
+    public static void main(String args[]){
+        int arr[]={1,2,3,4,6,7};
+        findsmallmissnumberArr(arr);
+    }
+}
+}
+
+*******************************************************************************************************************************
+30-03-2022
+*******************************************************************************************************************************
+Q1. Finding Missing Number in an array binary search
+public class MissingNumber {
+    public static void main(String[] args) {
+        int[] arr = {2, 7, 11, 15};
+        int target = 9;
+        int[] missingnum = twoSum(arr, target);
+        System.out.println(missingnum);
+
+    }
+public static int[] twoSum(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            if (nums[left] + nums[right] < target) {
+                left++;
+            } else if (nums[left] + nums[right] > target) {
+                right--;
+            } else {
+                return new int[]{left + 1, right + 1};
+            }
+        }
+        return new int[]{-1, -1};
+
+    }
+}
+
+2. https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/"
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int arr[]=new int[2];
+        
+        int i=0;
+        int j=numbers.length-1;
+        while(i<j){
+            if(numbers[i]+numbers[j]>target){
+                j--;
+            }else if(numbers[i]+numbers[j]==target){
+                arr[0]=i+1;
+                arr[1]=j+1;
+                break;
+            }else{
+                i++;
+            }
+        }
+        return arr;
+    }
+}
+*******************************************************************************************************************************
+31-03-2022
+*******************************************************************************************************************************
+Q1.https://www.techiedelight.com/find-number-1s-sorted-binary-array/
+class Countones{
+	public static int countonesarrayele(int arr[]){
+        int cnt=0;
+        for (int i = 0; i <arr.length ; i++) {
+            if(arr[i]==1){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+    public static void main(String args[]){
+        int arr[]={0,0,1,1,1,1,1,1};
+        System.out.println("Numbre of 1's present is :- "+countonesarrayele(arr));
+    }
+}
+}
+Q2. https://www.techiedelight.com/find-floor-ceil-number-sorted-array/
+public class floor {
+    public static int getCeil(int[] nums, int x)
+    {
+        // search space is nums[left…right]
+        int left = 0, right = nums.length - 1;
+
+        // initialize ceil to -1
+        int ceil = -1;
+
+        // loop till the search space is exhausted
+        while (left <= right)
+        {
+            // find the mid-value in the search space
+            int mid = (left + right) / 2;
+
+            // if `x` is equal to the middle element, it is the ceil
+            if (nums[mid] == x) {
+                return nums[mid];
+            }
+
+            // if `x` is less than the middle element, the ceil exists in the
+            // subarray nums[left…mid]; update ceil to the middle element
+            // and reduce our search space to the left subarray nums[left…mid-1]
+            else if (x < nums[mid])
+            {
+                ceil = nums[mid];
+                right = mid - 1;
+            }
+
+            // if `x` is more than the middle element, the ceil exists in the
+            // right subarray nums[mid+1…right]
+            else {
+                left = mid + 1;
+            }
+        }
+
+        return ceil;
+    }
+
+    // Function to find the floor of `x` in a sorted array nums[],
+    // i.e., the largest integer less than or equal to `x`
+    public static int getFloor(int[] nums, int x)
+    {
+        int left = 0, right = nums.length - 1;
+
+        // initialize floor to -1
+        int floor = -1;
+
+        // loop till the search space is exhausted
+        while (left <= right)
+        {
+            // find the mid-value in the search space
+            int mid = (left + right) / 2;
+
+            // if `x` is equal to the middle element, it is the floor
+            if (nums[mid] == x) {
+                return nums[mid];
+            }
+
+            // if `x` is less than the middle element, the floor exists in the left
+            // subarray nums[left…mid-1]
+            else if (x < nums[mid]) {
+                right = mid - 1;
+            }
+
+            // if `x` is more than the middle element, the floor exists in the
+            // subarray nums[mid…right]; update floor to the middle element
+            // and reduce our search space to the right subarray nums[mid+1…right]
+            else {
+                floor = nums[mid];
+                left = mid + 1;
+            }
+        }
+
+        return floor;
+    }
+
+    public static void main(String[] args)
+    {
+        int[] nums = { 1, 4, 6, 8, 9 };
+
+        for (int i = 0; i <= 10; i++) {
+            System.out.println("Number " + i + " —> ceil is " + getCeil(nums, i)
+                    + ", floor is " + getFloor(nums, i));
+        }
+    }
+}
+*******************************************************************************************************************************
+2-04-2022
+*******************************************************************************************************************************
+"Find the time complexity of the following algorithms
+
+1.static void fun()
+{
+    int i, j;
+    for (i = 1; i <= n; i++)
+        for (j = 1; j <= log(i); j++)
+            System.out.printf(""GeeksforGeeks"");
+}
+Ans O(nlogn).
+
+2.
+for (i = 0; i < N; i++) {
+    a = a + rand();
+}
+for (j = 0; j < M; j++) {
+    b = b + rand();
+}
+Ans O(n)
+
+
+3.
+int a = 0;
+for (i = 0; i < N; i++) {
+    for (j = N; j > i; j--) {
+        a = a + i + j;
+    }
+}
+Ans O(n2)
+
+4.
+int i, j, k = 0;
+for (i = n / 2; i <= n; i++) {
+    for (j = 2; j <= n; j = j * 2) {
+        k = k + n / 2;
+    }
+}
+Ans O(logn)
+
+5.
+int a = 0, i = N;
+while (i > 0) {
+    a += i;
+    i /= 2;
+}
+
+Ans O(logn)
+
+*******************************************************************************************************************************
+3-04-2022
+*******************************************************************************************************************************
+
+Q1. https://leetcode.com/problems/majority-element/
+class Solution {
+    public int majorityElement(int[] nums) {
+         int n = nums.length;
+        int count = 0;
+        int max = 0;
+        for(int i = 0; i < n; i++){
+            if(count == 0) max = nums[i];
+            if(nums[i] == max) count++;
+            else count--;
+        }
+        return max;
+    }
+}
+
+Q2. https://leetcode.com/problems/valid-anagram/
+
+Q 3. https://leetcode.com/problems/sorting-the-sentence/
+Search for an element in the Circular Sorted Array.
+Ex- {12,15,2,4,7,9}  Search for 7"
+public class Apr03 {
+	public static void main(String[] args) {
+		System.out.println(majorityElement(new int[] { 2, 2, 1, 1, 1, 2, 2 }));
+		System.out.println(isAnagram("rat","cat"));
+		System.out.println(sortSentence("Myself2 Me1 I4 and3"));
+		System.out.println(search(new int[] {12,15,2,4,7,9},7));
+	}
+
+	public static int search(int[] nums, int target) {
+		int l = 0, h = nums.length-1;
+        while(l <= h) {
+            int mid = l+(h-l)/2;
+			
+            if(nums[mid] == target) return mid+1;
+			 
+            if(nums[l] <= nums[mid]) 
+                if(target >= nums[l] && target <= nums[mid]) 
+                    h = mid-1;
+                else 
+                    l = mid+1;
+           
+			else 
+                if(target >= nums[mid] && target <= nums[h]) 
+                    l = mid+1;
+                else 
+                    h = mid-1;
+        }
+        
+        return -1;
+    }
+	
+	public static int majorityElement(int[] nums) {
+		int n = nums.length;
+		Arrays.sort(nums);
+		return nums[n / 2];
+	}
+	
+	public static boolean isAnagram(String s, String t) {
+        int[] letters = new int[128];
+        
+        for (char c : s.toCharArray()) {
+            int ascii = (int) c;
+            letters[ascii]++;
+        }
+        for (char c : t.toCharArray()) {
+            int ascii = (int) c;
+            letters[ascii]--;
+        }
+        for (int i = 0; i < letters.length; i++) {
+            if (letters[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+	
+	public static String sortSentence(String s) {
+        String[] str=s.split(" ");
+        String[] r=new String[str.length];
+        for(int i=0;i<str.length;i++){
+            char ch=(str[i].charAt(str[i].length()-1));
+            int j=ch-'0';
+            r[j-1]=str[i].substring(0,str[i].length()-1);
+        }
+        return String.join(" ",r);
+    }
+}
+*******************************************************************************************************************************
+4-04-2022
+*******************************************************************************************************************************
+"1. Write a program to sort an array using insertion sort
+2 .Add elements in arraylist and change the 3rd index element
+3.Coply all elements from one list to another
+4.Sort arraylist in descending order
+5.https://leetcode.com/problems/find-the-difference/"
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class hw_04_April {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int a[] = { 10, 8, 4, 1, 7 };
+
+		int b[] = insertionSort(a);
+		System.out.println(Arrays.toString(b));
+		
+		
+		List<Integer> list = new ArrayList<>();
+		List<Integer> list2 = new ArrayList<>();
+		
+		  list.add(10); 
+		  list.add(20); 
+		  list.add(30);
+		  list.add(40);
+		  list.add(50);
+		  list.add(60);
+		 
+		 System.out.println(list);
+		 
+		list.add(3, 15);
+		 
+		 System.out.println(list);
+		 	
+		 list2.addAll(list);
+		 
+		 System.out.println(list2);
+		 
+		 Collections.sort(list2,Collections.reverseOrder());
+		 System.out.println(list2);
+
+	}
+	
+	
+	private static int[] insertionSort(int[] a) {
+
+		// unsorted array loop
+		int key = 0;
+		for (int i = 1; i < a.length; i++) {
+			key = a[i];
+
+			int j = i - 1;
+
+			// sorted array -> traverse, find the right position for key
+			
+			while (j >= 0 && a[j] > key) {
+				a[j + 1] = a[j];
+				j--;
+			}
+
+			a[j + 1] = key;
+
+		}
+
+		return a;
+
+	}
+
+}
+*******************************************************************************************************************************
+5-04-2022
+*******************************************************************************************************************************
+"1. Segregate the prime numbers and non- prime numbers in an array. 
+Prime numbers should appear left in the array and non prime numbers should appear right in the array 
+a[] = {1,4,23,78,54,13,89}
+2. move zeros to end in linear TC and single pass.
+3. Sort 0s 1s 2s in linear TC
+4. Find if a given String is Palindrome or not in 2 pointer approach"
+
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+public class hw_05_April {
+
+	public static void main(String[] args) {
+		
+		 int a[] = {1,4,23,78,54,13,89};
+	        int N = a.length;
+	 
+	        segregatePrimeNonPrime(a, N);
+	        
+	        
+	        int arr[] = {1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0, 9};
+	        int n = arr.length;
+	        pushZerosToEnd(arr, n);
+	        System.out.println();
+	        System.out.println("Array after pushing zeros to the back: ");
+	        for (int i=0; i<n; i++) {
+	        	
+	        	 System.out.print(arr[i]+" ");
+	        	
+	        }
+	           
+	        
+	        System.out.println();
+	    
+	        int a1[] = { 2, 2, 2, 1, 1, 0, 1, 2, 1, 0, 1, 2, 2, 1, 0, 0 };
+
+			sort(a1);
+
+			System.out.println(Arrays.toString(a1));
+			
+			
+			String s = "madamm";
+			
+			System.out.println(isPalindrome(s));
+	        
+	}
+	
+	
+	
+	private static void sort(int[] a) {
+		
+		System.out.println();
+
+		int count1 = 0;
+		int count0 = 0;
+		int count2 = 0;
+		for (int i = 0; i < a.length; i++) {
+			if (a[i] == 0) {
+				count0++;
+			}
+
+			else if (a[i] == 1) {
+				count1++;
+			}
+
+			else {
+				count2++;
+			}
+
+		}
+		
+		System.out.println("count0 : "+count0);
+		System.out.println("count1 : "+count1);
+		System.out.println("count2 : "+count2);
+
+
+		for (int i = 0; i < count0; i++) {
+			a[i] = 0;
+		}
+
+		System.out.println(count0);
+		for (int i = count0; i < (count0+count1); i++) {
+			a[i] = 1;
+		}
+
+		for (int i = count0+count1; i < a.length; i++) {
+			a[i] = 2;
+		}
+
+	}
+	
+	
+	public static boolean isPrime(int n)
+		    {
+		        if (n <= 1)
+		            return false;
+		 
+		        if (n <= 3)
+		            return true;
+		 
+		        if (n % 2 == 0 || n % 3 == 0)
+		            return false;
+		 
+		        for (int i = 5; i * i <= n; i = i + 6) {
+		 
+		           
+		            if (n % i == 0 || n % (i + 2) == 0)
+		                return false;
+		        }
+		 
+		        return true;
+		    }
+		 
+		   
+		    static void segregatePrimeNonPrime(int arr[], int N)
+		    {
+		       
+		    	int left = 0, right = N - 1;
+		 
+		        
+		        while (left < right) {
+		 
+		            while (isPrime(arr[left]))
+		                left++;
+		 
+		            while (!isPrime(arr[right]))
+		                right--;
+		 
+		            if (left < right) {
+		 
+		               
+		                int temp = arr[right];
+		                arr[right] = arr[left];
+		                arr[left] = temp;
+		 
+		                left++;
+		                right--;
+		            }
+		        }
+		 
+		        
+		        for (int i = 0; i < N; i++)
+		            System.out.print(arr[i] + " ");
+		    }
+		    
+	public static void pushZerosToEnd(int arr[], int n)
+		    {
+		        int count = 0;  
+		 
+		        
+		        for (int i = 0; i < n; i++)
+		            if (arr[i] != 0)
+		                arr[count++] = arr[i]; 
+		        
+		        
+		        while (count < n)
+		            arr[count++] = 0;
+		    }
+	
+	
+	public static boolean isPalindrome(String str)
+	{
+	    int left=0,right=str.length()-1;
+	    while(left<right){
+	        if(str.charAt(left) != str.charAt(right))
+	            return false;
+	         left++;
+	         right--;     
+	    }
+	    return true;
+
+	}
+}
+*******************************************************************************************************************************
+6-04-2022
+*******************************************************************************************************************************
+"""1. Print the matrix in the spiral form
+a[][] =  
+{1,2,3,4}
+{5,6,7,8},
+{9,10,11,12},
+{13,14,15,16}
+
+Output- 
+
+1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
+import java.util.*;
+
+public class hw_07_April {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		int a[][] = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
+	
+		printSpiral(a);
+	}
+
+	private static void printSpiral(int[][] a) {
+		
+		int rowSize = a.length;
+		int colSize = a[0].length;
+		
+		int top = 0; // top row
+		int bottom = rowSize -1; // last row
+		
+		int left = 0 ;// first column
+		int right = colSize -1;
+		
+		int dir = 1;
+		// Dir1 -> Dir 2-> Dir3-> Di4 -> Dir1->Dir2->Dir3->Dir4
+		while(top<=bottom && left<=right)
+		{
+			if(dir ==1)
+			{
+				//print top row
+				
+				for(int i =left;i<=right;i++)
+				{
+					//row number is always constant, only column varies
+					System.out.print(a[top][i]+ " ");
+				}
+				
+				top++;
+				dir = 2;
+			}
+			
+			else if(dir ==2)
+			{
+				//print right column
+				for(int i =top;i<=bottom;i++)
+				{
+					System.out.print(a[i][right]+ " ");
+				}
+				
+				right --;
+				
+				dir = 3;
+			}
+			
+			else if(dir ==3)
+			{
+				//print bottom row
+				for(int i = right;i>=left;i--)
+				{
+					System.out.print(a[bottom][i]+" ");
+				}
+				
+				bottom --;
+				dir = 4;
+			}
+			
+			else if(dir == 4)
+			{
+				// Print left column
+				
+				for(int i =bottom;i>=top;i--)
+				{
+					System.out.print(a[i][left]+ " ");
+				}
+				
+				left++;
+				dir = 1;
+			}
+				
+			
+		}
+		
+	}
+
+}
+
+2. Given a boolean matrix mat[M][N] of size M X N, 
+modify it such that if a matrix cell mat[i][j] is 1 (or true) then make all the cells of ith row and jth column as 1.
+
+Example 1
+The matrix
+1 0
+0 0
+should be changed to following
+1 1
+1 0
+
+Example 2
+The matrix
+0 0 0
+0 0 1
+should be changed to following
+0 0 1
+1 1 1
+
+Example 3
+The matrix
+1 0 0 1
+0 0 1 0
+0 0 0 0
+should be changed to following
+1 1 1 1
+1 1 1 1
+1 0 1 1
+
+*******************************************************************************************************************************
+8-04-2022
+*******************************************************************************************************************************
+
+Q. Print odd numbers till 31
+Find the factorial of a number
+Find the nth power of any given number
+Print the reverse of a string"
+import java.util.Scanner;
+
+public class hw_08_April {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		 Scanner cs=new Scanner(System.in);
+		 int num1=1,num2;
+		    System.out.print("Enter your Limit:");
+		 num2=cs.nextInt();
+		    System.out.print("All odd number given range are:");
+		 odd(num1,num2);
+	         cs.close();
+	         
+	         
+	         int i,fact=1;  
+	  		int number=4;//It is the number to calculate factorial 
+	  		
+	  		fact = factorial(number);   
+	  		System.out.println("Factorial of "+number+" is: "+fact);  
+	  		
+	  		
+	  		int base = 3, powerRaised = 4;
+	  	    int result = power(base, powerRaised);
+
+	  	    System.out.println(base + "^" + powerRaised + "=" + result);
+	  	    
+	  	    
+	  	    String s ="Ajay";
+	  	    System.out.print(reverseString(s));
+	  		
+	  		
+	  		
+
+	}
+	
+	public static int odd(int num1, int num2)
+	{
+		 if(num1>num2)
+			    return 0;
+			   System.out.printf(num1+" ");
+			return odd(num1+2,num2);
+		}
+	
+	
+	
+	
+	public static int factorial(int n)
+ 	{    
+ 		if (n == 0)    
+ 			return 1;    
+ 		else    
+ 			return(n * factorial(n-1));    
+ 	}
+	
+	
+	public static int power(int base, int powerRaised) {
+	    if (powerRaised != 0) {
+
+	      // recursive call to power()
+	      return (base * power(base, powerRaised - 1));
+	    }
+	    else {
+	      return 1;
+	    }
+	  }
+	
+
+
+	public static String reverseString(String str) {  
+	  
+	if(str.isEmpty()) 
+	{  
+		System.out.println("String is empty."); 
+		return str;  
+	}   
+	else   
+	{  
+		return reverseString(str.substring(1))+str.charAt(0);  
+	}  
+
+}
+}
