@@ -1,0 +1,539 @@
+*******************************************************************************************************************************
+19-04-2022
+*******************************************************************************************************************************
+"Trace the quick sort algorithm for input : {2,3,1}
+
+package quick_sort_merge_sort;
+
+import java.util.Arrays;
+
+public class quickSortDemo {
+
+        public static void main(String[] args) {
+                // TODO Auto-generated method stub
+
+                int a[] = { 2, 3, 1 };
+
+                int start = 0;
+                int end = a.length - 1;
+
+                System.out.println(""Before Sort : "" + Arrays.toString(a));
+                quickSort(a, start, end);
+                System.out.println(""After Sort : "" + Arrays.toString(a));
+
+        }
+
+        private static void quickSort(int[] a, int start, int end) {
+
+                if (start < end) {
+                        int pI = partiton(a, start, end);
+                        quickSort(a, start, pI - 1);
+                        quickSort(a, pI + 1, end);
+                }
+        }
+
+        private static int partiton(int[] a, int start, int end) {
+
+                int pI = start;
+
+                for (int j = start; j < end; j++) {
+                        if (a[j] <= a[end]) // checking if j < = pivot element. a[end] is pivot
+                        {
+                                // swap the j and pI elements
+                                int temp = a[j];
+                                a[j] = a[pI];
+                                a[pI] = temp;
+
+                                pI++;
+
+                        }
+                }
+                int temp = a[pI];
+                a[pI] = a[end];
+                a[end] = temp;
+
+                return pI;
+        }
+
+}
+
+*******************************************************************************************************************************
+20-04-2022
+*******************************************************************************************************************************
+"Trace the logic for Merge Sort algorithm
+Input - {3,4,1,6,8}
+
+package quick_sort_merge_sort;
+
+import java.util.Arrays;
+
+public class mergeSortDemo {
+
+        public static void main(String[] args) {
+                // TODO Auto-generated method stub
+
+                int a[] = { 3, 4, 1, 6, 8, 2 };
+
+                int start = 0;
+                int end = a.length - 1;
+                
+                System.out.println(""Before : ""+Arrays.toString(a));
+
+                mergeSort(a, start, end);
+                
+                System.out.println(""After : ""+Arrays.toString(a));
+
+        }
+
+        private static void mergeSort(int[] a, int start, int end) {
+
+                if (start < end) {
+                        int mid = (start + end) / 2;
+
+                        mergeSort(a, start, mid);
+                        mergeSort(a, mid + 1, end);
+                        merge(a,start,end,mid);
+                }
+
+        }
+
+        private static void merge(int[] a, int start, int end, int mid) {
+                
+                int i = start;
+                int j = mid +1;
+                int k = 0;
+                
+                int b[] = new int[a.length];
+                
+                while(i<=mid && j<=end)
+                {
+                        if(a[i] <= a[j])
+                        {
+                                b[k] = a[i];
+                                i++;
+                                k++;
+                        }
+                        
+                        else
+                        {
+                                b[k] = a[j];
+                                k++;
+                                j++;
+                        }
+                }
+                        while(i>mid && j<=end)
+                        {
+                                b[k] = a[j];
+                                k++;
+                                j++;
+                        }
+                        while(j>end && i<=mid)
+                        {
+                                b[k] = a[i];
+                                k++;
+                                i++;
+                        }
+                        for (int m = start; m <= end; m++) {
+                                a[m] = b[m-start];   
+                        }
+                
+        }
+
+}
+
+*******************************************************************************************************************************
+21-04-2022
+*******************************************************************************************************************************
+1. Given two sorted arrays, the task is to merge them in a sorted manner.
+
+Input: arr1[] = { 1, 3, 4, 5}, arr2[] = {2, 4, 6, 8} 
+Output: arr3[] = {1, 2, 3, 4, 4, 5, 6, 8}
+
+Input: arr1[] = { 5, 8, 9}, arr2[] = {4, 7, 8} 
+Output: arr3[] = {4, 5, 7, 8, 8, 9} 
+
+package Javageek;
+
+import java.util.Arrays;
+
+public class MergetwoUnsortedArray {
+    public static void main(String args[]){
+        int a1[] = {4,8,7,9};
+        int a2[] = {34,22,12,5};
+        int arr[]=new int [a1.length+a2.length];
+        arr=mergetwounsortedArrays(a1,a2);
+        int start = 0;
+        int end = arr.length - 1;
+
+        System.out.println("Before Sort :  "+ Arrays.toString(arr));
+        quickSort(arr, start, end);
+        System.out.println("After Sort :  "+ Arrays.toString(arr));
+
+    }
+    private static void quickSort(int[] a, int start, int end) {
+
+        if (start < end) {
+            int pI = partiton(a, start, end);
+            quickSort(a, start, pI - 1);
+            quickSort(a, pI + 1, end);
+        }
+    }
+    private static int partiton(int[] a, int start, int end) {
+
+        int pI = start;
+
+        for (int j = start; j < end; j++) {
+            if (a[j] <= a[end]) // checking if j < = pivot element. a[end] is pivot
+            {
+                // swap the j and pI elements
+                int temp = a[j];
+                a[j] = a[pI];
+                a[pI] = temp;
+
+                pI++;
+
+            }
+        }
+
+        // We found all elements smaller or equal to the pivot. So place the pivot after
+        // them.
+        // last swap between partiton Idex and Pivot
+
+        int temp = a[pI];
+        a[pI] = a[end];
+        a[end] = temp;
+
+        return pI;
+    }
+    public static void posnegsqrtArray(int []arr){
+        int a[]=new int[arr.length];
+        for (int i = 0; i <arr.length ; i++) {
+            a[i]=arr[i]*arr[i];
+        }
+        for (int i = 0; i <a.length ; i++) {
+            System.out.print(a[i]+" ");
+        }
+    }
+    public static int [] mergetwounsortedArrays(int a1[], int a2[]){
+        int arr[]=new int[a1.length+a2.length];
+        int i=0,j=0,k=0;
+        while (i<a1.length){
+            arr[k]=a1[i];
+            i++;
+            k++;
+        }
+        while (j<a2.length){
+            arr[k]=a2[j];
+            j++;
+            k++;
+        }
+        return arr;
+    }
+}
+
+
+2. In which scenario do you use linked list and arraylist?
+In this scenario when we modify the list, insert the element and delete the element then we use Linked List.
+When we read the elements only then we use ArrayList.
+
+3. Given an array of both positive and negative integers ‘arr[]’ which are sorted. The task is to sort the square of the numbers of the Array. 
+Time complexity: O(n) 
+space complexity: O(n) 
+*******************************************************************************************************************************
+22-04-2022
+*******************************************************************************************************************************
+"1. Create a linked list and add the following elements to it - 2,4,1,3,8,5
+Search for the number 3 and display ts index
+
+Output -> Found at 4th position
+
+package MyLinkedList;
+
+public class Node {
+    int data;
+    Node next;
+}
+package MyLinkedList;
+
+public class LinkedList {
+    Node head;
+    public void insert(int data){
+        Node node=new Node();
+        node.data=data;
+        node.next=null;
+        if (head==null){
+            head=node;
+        }else{
+            Node n = head;
+            while (n.next!=null){
+                n=n.next;
+            }
+            n.next = node;
+        }
+    }
+public void search(int ele){
+        Node n=head;
+        int index=1;
+        while (n!=null){
+            if (n==null){
+                System.out.println("Not found...!!");
+                return;
+            }
+            if(n.data==ele){
+                System.out.println("Element found at " + index + "th index");
+                return;
+            }
+            index++;
+            n=n.next;
+        }
+    }
+    public void show(){
+        Node n=head;
+        while (n!=null){
+            System.out.print(n.data + " ");
+            n=n.next;
+        }
+    }
+}
+package MyLinkedList;
+
+public class RunnerList {
+    public static void main(String args[]){
+        LinkedList list=new LinkedList();
+        list.insert(2);
+        list.insert(4);
+        list.insert(1);
+        list.insert(3);
+        list.insert(8);
+        list.insert(5);
+        System.out.println();
+        list.show();
+        System.out.println();
+        list.search(3);
+    }
+}
+
+2. Create a liked list and add the following elements to it - 2,4,1,3,8,5.
+Add the element 20 at the end 
+
+Output - 2,4,1,3,8,5,20"
+
+package MyLinkedList;
+
+public class Node {
+    int data;
+    Node next;
+}
+package MyLinkedList;
+
+public class LinkedList {
+    Node head;
+    public void insert(int data){
+        Node node=new Node();
+        node.data=data;
+        node.next=null;
+        if (head==null){
+            head=node;
+        }else{
+            Node n = head;
+            while (n.next!=null){
+                n=n.next;
+            }
+            n.next = node;
+        }
+    }
+public void search(int ele){
+        Node n=head;
+        int index=1;
+        while (n!=null){
+            if (n==null){
+                System.out.println("Not found...!!");
+                return;
+            }
+            if(n.data==ele){
+                System.out.println("Element found at " + index + "th index");
+                return;
+            }
+            index++;
+            n=n.next;
+        }
+    }
+    public void show(){
+        Node n=head;
+        while (n!=null){
+            System.out.print(n.data + " ");
+            n=n.next;
+        }
+    }
+}
+package MyLinkedList;
+
+public class RunnerList {
+    public static void main(String args[]){
+        LinkedList list=new LinkedList();
+        list.insert(2);
+        list.insert(4);
+        list.insert(1);
+        list.insert(3);
+        list.insert(8);
+        list.insert(5);
+        list.insert(20);
+        System.out.println();
+        list.show();
+      
+    }
+}
+
+*******************************************************************************************************************************
+23-04-2022
+*******************************************************************************************************************************
+1. Create a linked list and add ten values to it by taking it from the user. 
+Delete all nodes which are greater than 40
+package MyLinkedList;
+
+public class Node {
+    int data;
+    Node next;
+}
+package MyLinkedList;
+
+public class LinkedList {
+    Node head;
+    public void insert(int data){
+        Node node=new Node();
+        node.data=data;
+        node.next=null;
+        if (head==null){
+            head=node;
+        }else{
+            Node n = head;
+            while (n.next!=null){
+                n=n.next;
+            }
+            n.next = node;
+        }
+    }
+    public void begInsert(int data){
+        Node node=new Node();
+        node.data=data;
+        node.next=null;
+        if (head==null){
+            head=node;
+        }else{
+            node.next=head;
+            head=node;
+        }
+    }
+    public void insertAt(int index, int data){
+        Node node=new Node();
+        node.data=data;
+        node.next=null;
+        if (index==0){
+            begInsert(data);
+        }else{
+            Node n=head;
+            for (int i = 0; i <index-1 ; i++) {
+                n=n.next;
+                if (n==null){
+                    System.out.println("Can't insert");
+                    return;
+                }
+            }
+            node.next=n.next;
+            n.next=node;
+
+        }
+    }
+    public void deleteAt(int index){
+        if (index==0){
+            head=head.next;
+        }else{
+            Node n=head;
+            Node n1=null;
+            for (int i = 0; i <index-1 ; i++) {
+                n=n.next;
+            }
+            n1=n.next;
+            n.next=n1.next;
+        }
+    }
+
+    public void search(int ele){
+        Node n=head;
+        int index=1;
+        while (n!=null){
+            if (n==null){
+                System.out.println("Not found...!!");
+                return;
+            }
+            if(n.data==ele){
+                System.out.println("Element found at " + index + "th index");
+                return;
+            }
+            index++;
+            n=n.next;
+        }
+    }
+    public void deletegreaterEle(int gretele){
+        Node n=head;
+        int ind=0;
+        while (n!=null){
+            if(n.data>gretele){
+                deleteAt(ind);
+                ind--;
+            }
+            ind++;
+            n=n.next;
+        }
+    }
+    public void show(){
+        Node n=head;
+        while (n!=null){
+            System.out.print(n.data + " ");
+            n=n.next;
+        }
+    }
+}
+
+package MyLinkedList;
+
+import java.util.Scanner;
+
+public class RunnerList {
+    public static void main(String args[]){
+        LinkedList list=new LinkedList();
+        Scanner sc=new Scanner(System.in);
+        for (int i = 0; i <10 ; i++) {
+            System.out.println("Enter the element:-");
+            int n=sc.nextInt();
+            list.insert(n);
+        }
+        list.show();
+        System.out.println();
+        list.deletegreaterEle(40);
+        list.show();
+    }
+}
+
+2. Print the node which is at index 5
+
+Input - 10->20->20->40->50->60->70->null
+Output - 50
+
+
+public void eleAtIndex(int index){
+        Node n=head;
+        for (int i = 0; i <index-1 ; i++) {
+            if (n==null){
+                System.out.println("Out of index..!!");
+                return;
+            }
+            n=n.next;
+        }
+        if (n==null){
+            System.out.println("Not found....!!");
+        }else{
+            System.out.println(n.data);
+        }
+
+    }
