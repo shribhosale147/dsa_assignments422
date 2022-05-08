@@ -1,0 +1,208 @@
+*******************************************************************************************************************************
+02-05-2022
+*******************************************************************************************************************************
+
+"1. Find the second minimum element in the array -> Come up with two appoaches and find which is best
+
+2. Find the frequency of each String in the array
+{""India"", ""Australia"",""India"",""Japan""}
+
+Output 
+India - 2
+Australia - 1
+Japan - 1"
+
+public static void arrFrequency(String arr[]) {
+        int fr[] = new int[arr.length];
+        int vis = -1;
+        for (int i = 0; i < arr.length; i++) {
+            int count = 1;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i].equals(arr[j])) {
+                    count++;
+                    fr[j] = vis;
+                }
+            }
+            if (fr[i] != vis) {
+                fr[i] = count;
+            }
+        }
+        for (int i = 0; i <arr.length ; i++) {
+            if (fr[i]!=vis){
+                System.out.println(arr[i]+"-"+fr[i]);
+            }
+        }
+    }
+*******************************************************************************************************************************
+04-05-2022
+*******************************************************************************************************************************
+
+"Find the squares of a sorted array
+https://www.geeksforgeeks.org/sort-array-converting-elements-squares/
+package Javageek;
+
+import java.util.Arrays;
+
+public class AssMay2022 {
+    public static void arraysquaresort(int arr[]){
+        for (int i = 0; i <arr.length ; i++) {
+            arr[i]=arr[i]*arr[i];
+        }
+        Arrays.sort(arr);
+        for (int i = 0; i <arr.length ; i++) {
+            System.out.print(arr[i]+" ");
+        }
+    }
+
+    public static void main(String[] args) {
+        int a[]={-5,-3,-1,4,6,7};
+        arraysquaresort(a);
+    }
+}
+
+
+Sum of Unique elements
+https://leetcode.com/problems/sum-of-unique-elements/"
+
+class Solution {
+    public int sumOfUnique(int[] nums) {
+        int sum=0;
+
+        for(int i=0;i<nums.length;i++){
+            int flag=0;
+            for(int j=i+1;j<nums.length;j++){
+                if(nums[i]==nums[j]){
+                    flag=1;
+                    nums[j]=-1;
+                }
+            }
+            if(flag==0 && nums[i]!=-1){
+                sum+=nums[i];
+            }
+        }
+        
+        return sum;
+    }
+}
+
+*******************************************************************************************************************************
+06-05-2022
+*******************************************************************************************************************************
+"1. Encrypt the string - 2
+https://practice.geeksforgeeks.org/problems/encrypt-the-string-21117/1/
+static String encryptString(String str) {
+        String t = "";
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            count = 1;
+            while (i < str.length() - 1 && str.charAt(i) == str.charAt(i + 1)) {
+                count++;
+                i++;
+            }
+            t = Integer.toHexString(count) + str.charAt(i) + t;
+        }
+        return t;
+    }
+
+2. Roatating the String check
+https://practice.geeksforgeeks.org/problems/check-if-string-is-rotated-by-two-places-1587115620/1"
+
+public static boolean isRotated(String str1, String str2)
+    {
+        String temp=str1;
+        temp = temp.substring(str1.length()-2,str1.length()) + str1.substring(0,str1.length()-2);
+        str1 = str1.substring(2,str1.length()) + str1.substring(0,2);
+        if(str1.equals(str2) || temp.equals(str2))
+            return true;
+        return false;
+    }
+*******************************************************************************************************************************
+07-05-2022
+*******************************************************************************************************************************
+
+"1. Product of Array without itself
+https://practice.geeksforgeeks.org/problems/product-array-puzzle4525/1/?page=1&difficulty[]=0&category[]=Arrays&sortBy=submissions
+
+class Solution 
+{ 
+	public static long[] productExceptSelf(int nums[], int n) 
+	{   
+	    
+	    long arr[]=new long[nums.length];
+        for(int i=0;i<nums.length;i++){
+            int mul=1;
+            for(int j=0;j<nums.length;j++){
+                if(i!=j){
+                    mul=mul*nums[j];
+                }
+            }
+            arr[i]=mul;
+        }
+        return arr;
+	} 
+} 
+
+2. Peak element 
+https://practice.geeksforgeeks.org/problems/peak-element/1"
+
+
+class Solution
+{
+	// Function to find the peak element
+	// arr[]: input array
+	// n: size of array a[]
+	public int peakElement(int[] arr,int n)
+    {
+        int index=0;
+     for(int i=n-1;i>0;i--){
+         if(arr[i]>arr[i-1]){
+             index= i;
+             break;
+         }
+     }
+     return index;
+    }
+}
+*******************************************************************************************************************************
+08-05-2022
+*******************************************************************************************************************************
+
+1. Equal 0, 1 and 2
+https://practice.geeksforgeeks.org/problems/equal-0-1-and-23208/1/
+2. Buddy Strings
+https://leetcode.com/problems/buddy-strings/
+
+class Solution {
+    public boolean buddyStrings(String s, String goal) {
+        char ar[]=s.toCharArray();
+        if(ar.length<3){
+            for(int i=ar.length-1;i>=0;i-=2){
+           char temp=ar[i];
+            ar[i]=ar[i-1];
+            ar[i-1]=temp;
+        }
+        String str="";
+        for(int i=0;i<ar.length;i++){
+            str=str+ar[i];
+        }
+        if(goal.equals(str)){
+            return true;
+        }
+        }else{
+            for(int i=ar.length-1;i>0;i-=2){
+           char temp=ar[i];
+            ar[i]=ar[i-1];
+            ar[i-1]=temp;
+        }
+        String str="";
+        for(int i=0;i<ar.length;i++){
+            str=str+ar[i];
+        }
+        if(goal.equals(str)){
+            return true;
+        }
+        }
+        
+        return false;
+    }
+}
